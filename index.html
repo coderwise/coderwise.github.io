@@ -206,5 +206,25 @@
   </footer>
 </div>
 
+  <script>
+    // Privacy-friendly visit counter: no cookies, no IDs. Sends path, referrer host and UTM tags.
+    (function () {
+      var host = location.hostname;
+      if (host !== 'coderwise.com' && host !== 'www.coderwise.com') return;
+      if (navigator.doNotTrack === '1') return;
+      var q = new URLSearchParams(location.search), ref = '';
+      try { ref = new URL(document.referrer).hostname; } catch (e) {}
+      if (ref === host) ref = '';
+      var body = JSON.stringify({
+        path: location.pathname,
+        referrerHost: ref || null,
+        utmSource: q.get('utm_source'),
+        utmMedium: q.get('utm_medium'),
+        utmCampaign: q.get('utm_campaign')
+      });
+      navigator.sendBeacon('https://analytics-server-141878711681.us-east4.run.app/collect',
+        new Blob([body], { type: 'application/json' }));
+    })();
+  </script>
 </body>
 </html>
