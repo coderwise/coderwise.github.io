@@ -213,6 +213,12 @@
       if (host !== 'coderwise.com' && host !== 'www.coderwise.com') return;
       if (navigator.doNotTrack === '1') return;
       var q = new URLSearchParams(location.search), ref = '';
+      // Opt out your own browser: open /?notrack=1 once (and /?notrack=0 to undo).
+      try {
+        if (q.get('notrack') === '1') localStorage.setItem('notrack', '1');
+        if (q.get('notrack') === '0') localStorage.removeItem('notrack');
+        if (localStorage.getItem('notrack') === '1') return;
+      } catch (e) {}
       try { ref = new URL(document.referrer).hostname; } catch (e) {}
       if (ref === host) ref = '';
       var body = JSON.stringify({
