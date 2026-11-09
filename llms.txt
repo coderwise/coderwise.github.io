@@ -1,0 +1,32 @@
+# Coderwise
+
+> Coderwise Inc. is an independent software company in Canada. We offer Kotlin Multiplatform (KMP) consulting for teams that ship on Android and iOS, and we build our own privacy-respecting mobile apps on the same stack.
+
+The consulting work is done hands-on by the people the client talks to, not handed off to a rotating team. Every engagement starts with a short conversation and a written scope. Contact: info@coderwise.com.
+
+## Consulting services
+
+- [KMP readiness assessment](https://coderwise.com/#consulting): a short, fixed-price review of an existing Android and iOS app. It covers what can move to a shared Kotlin core, what should stay native, and the cost and risk. The result is a go/no-go decision and a migration plan. Typically 1–2 weeks.
+- [Migration and product delivery](https://coderwise.com/#consulting): fixed-scope, incremental delivery. Business logic, networking and storage move into shared Kotlin modules; the UI stays native or moves to Compose Multiplatform where it fits; each step ships to production. New multiplatform products can also be built from scratch. Typically 3–6 months.
+- [Fractional KMP architect](https://coderwise.com/#consulting): ongoing design authority and code review covering architecture and module boundaries, build and CI setup, and mentoring engineers new to Kotlin Multiplatform. A couple of days a week.
+
+## Evidence
+
+- [com.coderwise.libs on GitHub](https://github.com/coderwise/libs-mobile): our shared Kotlin Multiplatform libraries, open source and published on Maven Central.
+- Our own apps (below) run on Kotlin Multiplatform, with releases on Google Play and the App Store.
+- Production experience across consumer and financial Android apps used by millions of people.
+
+## Our apps
+
+- [CardsOn](https://play.google.com/store/apps/details?id=com.coderwise.cards): a personal almanac for reference data you look up but never memorize (plates, policies, member IDs), stored on your device.
+- [WeatherOn](https://play.google.com/store/apps/details?id=com.coderwise.weather) ([App Store](https://apps.apple.com/app/id6815888104)): current conditions, a 7-day forecast and live rain radar, without the clutter.
+- [MapsOn](https://play.google.com/store/apps/details?id=com.coderwise.maps) ([App Store](https://apps.apple.com/app/id6806830652)): fast, lightweight maps with street, satellite and topographic layers; track recording and waypoints in MapsOn Pro.
+- [ClocksOn](https://play.google.com/store/apps/details?id=com.coderwise.clocks) ([App Store](https://apps.apple.com/app/id6792508849)): a calm full-screen bedside clock that adapts its brightness to the room.
+- MilesOn: car trip meters that track themselves (distance since last charge, service or tire change), with Android Auto and CarPlay support and optional OBD2. In beta.
+
+## Optional
+
+- Privacy policies: [MilesOn](https://coderwise.com/policy/mileson-privacy-policy.html), [CardsOn](https://coderwise.com/policy/cardson-privacy-policy.html), [WeatherOn](https://coderwise.com/policy/weatheron-privacy-policy.html), [MapsOn](https://coderwise.com/policy/mapson-privacy-policy.html), [ClocksOn](https://coderwise.com/policy/clockson-privacy-policy.html)
+- [Coderwise on Google Play](https://play.google.com/store/apps/dev?id=5556124976219069687)
+- [Coderwise on the App Store](https://apps.apple.com/developer/coderwise-inc/id6792508851)
+- [Coderwise on LinkedIn](https://www.linkedin.com/company/coderwise-inc)
