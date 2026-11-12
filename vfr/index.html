@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChartsOn — a VFR flight app built for Android</title>
+<meta name="description" content="ChartsOn is a planned VFR moving-map and flight-planning app built for Android first: offline FAA sectionals, weather, simple routes and ADS-B In. Planned price $49.99 a year. Join the waitlist.">
+<link rel="canonical" href="https://coderwise.com/vfr/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Coderwise">
+<meta property="og:url" content="https://coderwise.com/vfr/">
+<meta property="og:title" content="ChartsOn — a VFR flight app built for Android">
+<meta property="og:description" content="Offline FAA sectionals, weather, simple routes and ADS-B In, built for Android first. Planned price $49.99 a year. Join the waitlist.">
+<meta name="twitter:card" content="summary">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1d21;
+    --muted: #5c6470;
+    --card: #f5f6f8;
+    --border: #e3e6ea;
+    --accent: #0a66c2;
+    --accent-fg: #ffffff;
+    --chart-land: #e9efe2;
+    --chart-water: #cfe3f3;
+    --chart-line: #b4347a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101317;
+      --fg: #e8eaed;
+      --muted: #9aa3ad;
+      --card: #1a1f25;
+      --border: #2a3138;
+      --accent: #4d9fec;
+      --accent-fg: #0d1117;
+      --chart-land: #1d2620;
+      --chart-water: #16283a;
+      --chart-line: #e672b0;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 56px 0 24px; }
+  .logo {
+    display: inline-block;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  .hero {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  @media (max-width: 720px) {
+    .hero { grid-template-columns: 1fr; gap: 28px; }
+  }
+  .eyebrow {
+    font-size: 0.8rem;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: clamp(1.9rem, 5vw, 2.7rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  .tagline {
+    margin-top: 16px;
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+  }
+  .price {
+    margin-top: 24px;
+    font-size: 1.05rem;
+  }
+  .price strong { font-size: 1.5rem; letter-spacing: -0.02em; }
+  .price span { color: var(--muted); }
+  .cta {
+    display: inline-block;
+    margin-top: 20px;
+    background: var(--accent);
+    color: var(--accent-fg);
+    font-weight: 650;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 13px 22px;
+    border-radius: 10px;
+  }
+  .cta:hover { filter: brightness(1.08); }
+  .cta:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+  .cta-note { margin-top: 10px; font-size: 0.88rem; color: var(--muted); max-width: 440px; }
+  .cta-note a { color: var(--accent); text-decoration: none; }
+  .cta-note a:hover { text-decoration: underline; }
+  .chart {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    display: block;
+  }
+  section { padding: 40px 0; }
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .card h3 { font-size: 1.05rem; font-weight: 650; margin-bottom: 6px; }
+  .card p { font-size: 0.92rem; color: var(--muted); }
+  .prose p { color: var(--muted); max-width: 640px; }
+  .prose p + p { margin-top: 12px; }
+  .prose a { color: var(--accent); text-decoration: none; }
+  .prose a:hover { text-decoration: underline; }
+  ul.plain { list-style: none; max-width: 640px; }
+  ul.plain li { margin-bottom: 8px; color: var(--muted); }
+  ul.plain strong { color: var(--fg); font-weight: 650; }
+  footer {
+    margin-top: 32px;
+    padding: 28px 0 40px;
+    border-top: 1px solid var(--border);
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer p + p { margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="logo" href="/">coder<span>wise</span></a>
+    <div class="hero">
+      <div>
+        <p class="eyebrow">ChartsOn · in development</p>
+        <h1>A VFR flight app built for Android first.</h1>
+        <p class="tagline">Offline sectionals, weather, simple routes and ADS-B In on the phone or tablet you already own. Not a port of an iPad app.</p>
+        <p class="price"><strong>$49.99</strong> <span>a year, planned · 30-day free trial</span></p>
+        <a class="cta" id="join" href="mailto:info@coderwise.com?subject=ChartsOn%20waitlist&amp;body=Add%20me%20to%20the%20ChartsOn%20waitlist.%0A%0AOptional%2C%20but%20it%20helps%3A%0A-%20What%20I%20fly%20with%20today%20(app%20%2B%20device)%3A%20%0A-%20What%20ChartsOn%20would%20need%20before%20I%20would%20switch%3A%20%0A">Join the waitlist</a>
+        <p class="cta-note">Opens an email to <a href="mailto:info@coderwise.com?subject=ChartsOn%20waitlist">info@coderwise.com</a>. One message when the beta opens, nothing else.</p>
+      </div>
+      <svg class="chart" viewBox="0 0 400 300" role="img" aria-label="Illustration of a moving map: a route between two airports with the aircraft position on it">
+        <rect width="400" height="300" fill="var(--chart-land)"/>
+        <path d="M0 210 C70 190 110 250 180 235 S300 180 400 215 V300 H0 Z" fill="var(--chart-water)"/>
+        <g fill="none" stroke="var(--muted)" stroke-opacity="0.35" stroke-width="1">
+          <path d="M0 75 H400 M0 150 H400 M100 0 V300 M200 0 V300 M300 0 V300"/>
+        </g>
+        <circle cx="285" cy="95" r="62" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="7 5"/>
+        <circle cx="285" cy="95" r="34" fill="none" stroke="var(--accent)" stroke-width="2"/>
+        <path d="M78 205 L285 95" stroke="var(--chart-line)" stroke-width="4" stroke-linecap="round"/>
+        <g fill="var(--bg)" stroke="var(--chart-line)" stroke-width="3">
+          <circle cx="78" cy="205" r="9"/>
+          <circle cx="285" cy="95" r="9"/>
+        </g>
+        <g transform="translate(176 153) rotate(62)">
+          <path d="M0 -15 L10 11 L0 5 L-10 11 Z" fill="var(--fg)"/>
+        </g>
+        <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="600" fill="var(--fg)">
+          <text x="50" y="232">KABC</text>
+          <text x="300" y="82">KXYZ</text>
+        </g>
+        <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="var(--muted)">
+          <text x="16" y="24">GS 104 kt</text>
+          <text x="16" y="40">TRK 062°</text>
+          <text x="312" y="24">ETE 0:21</text>
+        </g>
+      </svg>
+    </div>
+  </header>
+
+  <section>
+    <h2>What the first version covers</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Offline sectionals</h3>
+        <p>Current FAA VFR charts stored on the device, so the map works with no signal. A clear warning when a chart cycle has expired.</p>
+      </div>
+      <div class="card">
+        <h3>Moving map</h3>
+        <p>Your position, track and groundspeed over the chart, with an airport directory one tap away.</p>
+      </div>
+      <div class="card">
+        <h3>Weather and NOTAMs</h3>
+        <p>METARs and TAFs on the map and on each airport page, plus NOTAMs for your route.</p>
+      </div>
+      <div class="card">
+        <h3>Simple routes</h3>
+        <p>Direct-to and multi-leg routes with distance and time, and a track log of every flight.</p>
+      </div>
+      <div class="card">
+        <h3>ADS-B In</h3>
+        <p>Traffic and in-flight weather from any GDL90 receiver, including Stratux, Sentry and Stratus.</p>
+      </div>
+      <div class="card">
+        <h3>Phones and cheap tablets</h3>
+        <p>Designed for the Android hardware pilots really use as a kneeboard, not only the newest flagship.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What it is not</h2>
+    <ul class="plain">
+      <li><strong>VFR only.</strong> No approach plates or IFR procedures.</li>
+      <li><strong>United States charts only</strong> at launch.</li>
+      <li><strong>Not available yet.</strong> It gets built if enough pilots want it, which is what this waitlist measures.</li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <h2>Why we are building it</h2>
+    <p>ForeFlight does not run on Android. The apps that do are either free and rough, or treat Android as a second platform. Student and private pilots who fly with an Android phone or tablet deserve an app made for it.</p>
+    <p>ChartsOn comes from <a href="/">Coderwise</a>, the company behind <a href="/#apps">MapsOn</a>, an offline maps app for Android and iOS. The map engine is the part we have already shipped.</p>
+    <p>Tell us what you fly with and what would make you switch: <a href="mailto:info@coderwise.com?subject=ChartsOn%20waitlist">info@coderwise.com</a>. Every reply is read.</p>
+  </section>
+
+  <footer>
+    <p>ChartsOn will be an aid to situational awareness for VFR flight. It will not be certified for navigation and does not replace current official charts, a preflight briefing or pilot judgment.</p>
+    <p>© 2026 Coderwise Inc. · Canada · <a href="/">coderwise.com</a></p>
+  </footer>
+</div>
+
+  <script>
+    // Privacy-friendly visit counter: no cookies, no IDs. Sends path, referrer host and UTM tags.
+    (function () {
+      var host = location.hostname;
+      if (host !== 'coderwise.com' && host !== 'www.coderwise.com') return;
+      if (navigator.doNotTrack === '1') return;
+      var q = new URLSearchParams(location.search), ref = '';
+      try {
+        if (q.get('notrack') === '1') localStorage.setItem('notrack', '1');
+        if (q.get('notrack') === '0') localStorage.removeItem('notrack');
+        if (localStorage.getItem('notrack') === '1') return;
+      } catch (e) {}
+      try { ref = new URL(document.referrer).hostname; } catch (e) {}
+      if (ref === host) ref = '';
+      var body = JSON.stringify({
+        path: location.pathname,
+        referrerHost: ref || null,
+        utmSource: q.get('utm_source'),
+        utmMedium: q.get('utm_medium'),
+        utmCampaign: q.get('utm_campaign')
+      });
+      navigator.sendBeacon('https://analytics-server-141878711681.us-east4.run.app/collect',
+        new Blob([body], { type: 'application/json' }));
+    })();
+  </script>
+</body>
+</html>
