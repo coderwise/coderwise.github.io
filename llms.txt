@@ -22,7 +22,7 @@ The consulting work is done hands-on by the people the client talks to, not hand
 - [WeatherOn](https://play.google.com/store/apps/details?id=com.coderwise.weather) ([App Store](https://apps.apple.com/app/id6815888104)): current conditions, a 7-day forecast and live rain radar, without the clutter.
 - [MapsOn](https://play.google.com/store/apps/details?id=com.coderwise.maps) ([App Store](https://apps.apple.com/app/id6806830652)): fast, lightweight maps with street, satellite and topographic layers; track recording and waypoints in MapsOn Pro.
 - [ClocksOn](https://play.google.com/store/apps/details?id=com.coderwise.clocks) ([App Store](https://apps.apple.com/app/id6792508849)): a calm full-screen bedside clock that adapts its brightness to the room.
-- MilesOn: car trip meters that track themselves (distance since last charge, service or tire change), with Android Auto and CarPlay support and optional OBD2. In beta.
+- [MilesOn](https://apps.apple.com/app/id6796560814) (App Store): car trip meters that track themselves (distance since last charge, service or tire change), with Android Auto and CarPlay support and optional OBD2.
 
 ## Optional
 
